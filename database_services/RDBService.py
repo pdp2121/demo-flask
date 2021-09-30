@@ -64,6 +64,22 @@ class RDBService:
         return res
 
     @classmethod
+    def get_full_table(cls, db_schema, table_name):
+
+        conn = RDBService._get_db_connection()
+        cur = conn.cursor()
+
+        sql = "select * from " + db_schema + "." + table_name
+        print("SQL Statement = " + cur.mogrify(sql, None))
+
+        res = cur.execute(sql)
+        res = cur.fetchall()
+
+        conn.close()
+
+        return res
+
+    @classmethod
     def get_where_clause_args(cls, template):
 
         terms = []
