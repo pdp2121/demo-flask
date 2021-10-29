@@ -70,6 +70,7 @@ class RDBService:
         cur = conn.cursor()
 
         sql = "select * from " + db_schema + "." + table_name
+        #sql = "SHOW DATABASES"
         print("SQL Statement = " + cur.mogrify(sql, None))
 
         res = cur.execute(sql)

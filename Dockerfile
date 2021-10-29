@@ -20,6 +20,7 @@ COPY . /
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt /
 RUN pip3 install -r requirements.txt
+RUN pip3 install cryptography
 
 # Run app.py when the container launches
 COPY app.py /

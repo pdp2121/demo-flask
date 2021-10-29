@@ -14,4 +14,5 @@ INSERT INTO `usersInfo` VALUES ('1', 'Phu', 'Pham', 'pdp2121@columbia.edu');
 INSERT INTO `usersInfo` VALUES ('2', 'Aditya', 'Kulkarni', 'ak4725@columbia.edu');
 INSERT INTO `usersInfo` VALUES ('3', 'Isha', 'Shah', 'is2404@columbia.edu');
 INSERT INTO `usersInfo` VALUES ('4', 'Di', 'Chen', 'dc3260@columbia.edu');
+INSERT INTO `usersInfo` VALUES ('5', 'Barbara', 'Zhan', 'bz2310@columbia.edu');
 UNLOCK TABLES;

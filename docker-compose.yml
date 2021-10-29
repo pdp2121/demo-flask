@@ -6,14 +6,15 @@ services:
       - db
     ports:
       - "5000:5000"
-
   db:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=test
-      - MYSQL_USER=dbuser
-      - MYSQL_PASSWORD=dbuserdbuser
-    ports: 
-      - "3306:3306"
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:

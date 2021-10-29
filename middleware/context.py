@@ -16,16 +16,16 @@ def get_db_info():
 
     if db_host is not None:
         db_info = {
-            "host": db_host,
-            "user": db_user,
-            "password": db_password,
+            "host": "thesequels.cx5yyazvwywf.us-east-2.rds.amazonaws.com",
+            "user": "admin",
+            "password": "password",
             "cursorclass": pymysql.cursors.DictCursor
         }
     else:
         db_info = {
-            "host": "localhost",
-            "user": "dbuser",
-            "password": "dbuserdbuser",
+            "host": "thesequels.cx5yyazvwywf.us-east-2.rds.amazonaws.com",
+            "user": "admin",
+            "password": "password",
             "cursorclass": pymysql.cursors.DictCursor
         }
 
