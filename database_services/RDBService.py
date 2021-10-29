@@ -79,6 +79,45 @@ class RDBService:
         conn.close()
 
         return res
+    
+    @classmethod
+    def get_by_id(cls, db_schema, table_name, idRequest):
+
+        conn = RDBService._get_db_connection()
+        cur = conn.cursor()
+
+        sql = "select * from " + db_schema + "." + table_name + " where id = " + idRequest
+        #sql = "SHOW DATABASES"
+        print("SQL Statement = " + cur.mogrify(sql, None))
+
+        res = cur.execute(sql)
+        res = cur.fetchall()
+
+        conn.close()
+
+        return res
+    
+    @classmethod
+    def get_by_foreign_id(cls, db_schema, table_name1, table_name2, field1, field2, idRequest):
+
+        conn = RDBService._get_db_connection()
+        cur = conn.cursor()
+
+        sql = "select " + db_schema + "." + table_name2 + ".* from " + db_schema + "." + table_name2 + \
+             " inner join " + db_schema + "." + table_name1 + \
+             " where " + db_schema + "." + table_name2 + "." + field2 + " = "  + db_schema + "." + table_name1 + "." +  field1 + \
+             " and " + db_schema + "." + table_name1 + ".ID = " + idRequest
+        #sql = "SHOW DATABASES"
+        print("SQL Statement = " + cur.mogrify(sql, None))
+
+        res = cur.execute(sql)
+        res = cur.fetchall()
+
+        conn.close()
+
+        return res
+    
+
 
     @classmethod
     def get_where_clause_args(cls, template):
