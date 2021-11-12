@@ -26,6 +26,11 @@ class UserResource(BaseRDBApplicationResource):
         return res
     
     @classmethod
+    def get_user_data_by_email(cls, dbName, email_address):
+        res = RDBService.get_by_key(dbName, "user", "emailAddress", "'" + email_address + "'")
+        return res
+    
+    @classmethod
     def get_user_address_by_id(cls, dbName, userID):
         res = RDBService.get_by_foreign_id(dbName, "user", "address", "addressID", "ID", userID)
         return res

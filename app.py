@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, request
 from flask_cors import CORS
 import json
 import logging
@@ -36,14 +36,41 @@ def get_users():
 
 @app.route('/users/<userID>')
 def get_users_by_id(userID):
-    res = UserResource.get_user_data_by_id("usersInfo", userID)
-    rsp = Response(json.dumps(res), status=200, content_type="application/json")
+    if not userID.isnumeric():
+        rsp = Response("Bad data" ,status = 400)
+    else:
+        res = UserResource.get_user_data_by_id("usersInfo", userID)
+        if not res:
+            rsp = Response("Not found" ,status = 404)
+        else:
+            rsp = Response(json.dumps(res), status=200, content_type="application/json")
     return rsp
+
+@app.route('/users/email/<email_address>', methods = ['GET', 'POST'])
+def user_email(email_address):
+    if request.method == 'GET':
+        if not ("@" in email_address):
+            rsp = Response("Bad data" ,status = 400)
+        else:
+            res = UserResource.get_user_data_by_email("usersInfo", email_address)
+            if not res:
+                rsp = Response("Not found" ,status = 404)
+            else:
+                rsp = Response(json.dumps(res), status=200, content_type="application/json")
+        return rsp
+
+            
 
 @app.route('/users/<userID>/address')
 def get_address_by_userid(userID):
-    res = UserResource.get_user_address_by_id("usersInfo", userID)
-    rsp = Response(json.dumps(res), status=200, content_type="application/json")
+    if not userID.isnumeric():
+        rsp = Response("Bad data" ,status = 400)
+    else:
+        res = UserResource.get_user_address_by_id("usersInfo", userID)
+        if not res:
+            rsp = Response("Not found" ,status = 404)
+        else:
+            rsp = Response(json.dumps(res), status=200, content_type="application/json")
     return rsp
 
 @app.route('/address')
@@ -54,14 +81,26 @@ def get_address():
 
 @app.route('/address/<addressID>')
 def get_address_by_id(addressID):
-    res = AddressResource.get_address_data_by_id("usersInfo", addressID)
-    rsp = Response(json.dumps(res), status=200, content_type="application/json")
+    if not addressID.isnumeric():
+        rsp = Response("Bad data" ,status = 400)
+    else:
+        res = AddressResource.get_address_data_by_id("usersInfo", addressID)
+        if not res:
+            rsp = Response("Not found" ,status = 404)
+        else:
+            rsp = Response(json.dumps(res), status=200, content_type="application/json")
     return rsp
 
 @app.route('/address/<addressID>/users')
 def get_users_by_addressid(addressID):
-    res = AddressResource.get_address_user_by_id("usersInfo", addressID)
-    rsp = Response(json.dumps(res), status=200, content_type="application/json")
+    if not addressID.isnumeric():
+        rsp = Response("Bad data" ,status = 400)
+    else:
+        res = AddressResource.get_address_user_by_id("usersInfo", addressID)
+        if not res:
+            rsp = Response("Not found" ,status = 404)
+        else:
+            rsp = Response(json.dumps(res), status=200, content_type="application/json")
     return rsp
 
 @app.route('/<db_schema>/<table_name>/<column_name>/<prefix>')

@@ -92,6 +92,25 @@ class RDBService:
 
         res = cur.execute(sql)
         res = cur.fetchall()
+        print(res)
+
+        conn.close()
+
+        return res
+
+    @classmethod
+    def get_by_key(cls, db_schema, table_name, key_name, key):
+
+        conn = RDBService._get_db_connection()
+        cur = conn.cursor()
+
+        sql = "select * from " + db_schema + "." + table_name + " where " + key_name + " = " + key
+        #sql = "SHOW DATABASES"
+        print("SQL Statement = " + cur.mogrify(sql, None))
+
+        res = cur.execute(sql)
+        res = cur.fetchall()
+        print(res)
 
         conn.close()
 
